@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+    vault:
+        image: vault:1.4.0
+        container_name: vault
+        ports:
+            - "8200:8200"
+        volumes:
+            - ./config:/vault/config
+            - ./file:/vault/file
+            - ./logs:/vault/logs
+        environment:
+            - VAULT_ADDR=http://127.0.0.1:8200
+        command: server
+        cap_add:
+            - IPC_LOCK
